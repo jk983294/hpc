@@ -1,0 +1,5 @@
+.idea/
+install/
+*.pyc
+cmake-build-debug/
+*.gch

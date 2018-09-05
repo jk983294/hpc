@@ -1,0 +1,79 @@
+# doc
+https://software.intel.com/sites/landingpage/IntrinsicsGuide/
+
+# data type
+__m64                           8 8-bit; 4 16-bit; 2 32-bit; 1 64-bit
+__m128                          4 32-bit
+__m128d                         2 64-bit double                                                     16 byte boundary
+__m128i                         16 8-bit; 8 16-bit; 4 32-bit; 2 64-bit integer                      16 byte boundary
+
+# intrinsic name convention
+_mm_<op>_<suffix>
+<op>                            add sub extract div load store
+<suffix>                        denote the data type the instruction operates on
+                                first 1-2 letter:   p       packed
+                                                    ep      extended packed
+                                                    s       scalar
+                                remaining letters:  s       single-precision floating point
+                                                    d       double-precision floating point
+                                                    i128    signed 128-bit integer
+                                                    i64     signed 64-bit integer
+                                                    u64     unsigned 64-bit integer
+                                                    i32     signed 32-bit integer
+                                                    u32     unsigned 32-bit integer
+                                                    i16     signed 16-bit integer
+                                                    u16     unsigned 16-bit integer
+                                                    i8      signed 8-bit integer
+                                                    u8      unsigned 8-bit integer
+
+# prepare data
+__m256d _mm256_cvtepi32_pd (__m128i a)              # 4 int32_t to 4 double
+__m256 increment = _mm256_set_ps(step, step, step, step, step, step, step, step);
+__m256 increment = _mm256_set1_ps(step);
+__m256 init = _mm256_setzero_ps();
+
+# operations
+## Arithmetic Intrinsics
+__m128i _mm_add_epi32 (__m128i a, __m128i b)        # 4 int32_t add
+
+## Logical Intrinsics
+__m128i _mm_and_si128 (__m128i a, __m128i b)
+## Compare Intrinsics
+__m128i _mm_cmpeq_epi32 (__m128i a, __m128i b)      # 4 int32_t check ==
+## set
+double a[2] = {1.0, 2.0};
+__m128d t = _mm_load_pd(a);                         # high address [2.0, 1.0] low address
+__m128d t = _mm_set_pd(2.0, 1.0);                   # high address [2.0, 1.0] low address
+__m128d t = _mm_setr_pd(1.0, 2.0);                  # high address [2.0, 1.0] low address
+
+__m64 _mm_set_pi32 (int e1, int e0)                 # init to [e1, e0]
+__m64 _mm_set1_pi32 (int a)                         # init to [a, a]
+
+# access data by index within vector
+__int32 _mm256_extract_epi32 (__m256i a, const int index)
+
+# header:
+#include <mmintrin.h>       // MMX
+#include <xmmintrin.h>      // SSE(include mmintrin.h)
+#include <emmintrin.h>      // SSE2(include xmmintrin.h)
+#include <pmmintrin.h>      // SSE3(include emmintrin.h)
+#include <tmmintrin.h>      // SSSE3(include pmmintrin.h)
+#include <smmintrin.h>      // SSE4.1(include tmmintrin.h)
+#include <nmmintrin.h>      // SSE4.2(include smmintrin.h)
+#include <wmmintrin.h>      // AES(include nmmintrin.h)
+#include <immintrin.h>      // AVX(include wmmintrin.h)
+#include <x86intrin.h>      // pulls in everything you need
+
+
+# check cpu support for sse:
+$ cat /proc/cpuinfo | grep sse
+flags           : sse sse2 ssse3 sse4_1 sse4_2 avx
+
+# Architecture
+IA-32 Architecture      systems based on 32-bit processors
+Intel 64 Architecture   systems based on IA-32 architecture processors which have 64-bit architectural extensions, like Intel Core TM2 processor family
+IA-64 Architecture      systems based on the Intel Itanium processor running a 64-bit operating system
+
+# registers
+MMX                             eight 64-bit registers (mm0 to mm7)
+Streaming SIMD Extensions       eight 128-bit registers (xmm0 to xmm7)
