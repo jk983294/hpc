@@ -15,20 +15,6 @@ using namespace std;
 
 namespace flux {
 
-class Timer {
-public:
-    Timer(const std::string& name) : name_(name), start_(std::clock()) {}
-
-    ~Timer() {
-        double elapsed = (double(std::clock() - start_) / double(CLOCKS_PER_SEC));
-        std::cout << name_ << ": " << std::fixed << std::setprecision(9) << elapsed << " s" << std::endl;
-    }
-
-private:
-    std::string name_;
-    std::clock_t start_;
-};
-
 static constexpr uint64_t oneSecondNano{1000000000};
 
 inline double timespec2double(const timespec& ts) {
@@ -93,6 +79,20 @@ inline std::string now_string() {
                   tm.tm_hour, tm.tm_min, tm.tm_sec);
     return string(buffer);
 }
+
+    class Timer {
+    public:
+        Timer(const std::string& name) : name_(name), start_(ntime()) {}
+
+        ~Timer() {
+            uint64_t elapsed = ntime() - start_;
+            std::cout << name_ << ": " << std::fixed << std::setprecision(9) << ((double)elapsed / 1e9) << " s" << std::endl;
+        }
+
+    private:
+        std::string name_;
+        uint64_t start_;
+    };
 }
 
 #define TIMER(name) flux::Timer timer__(name);

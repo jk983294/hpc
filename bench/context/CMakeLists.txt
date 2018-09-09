@@ -8,7 +8,3 @@ foreach( sourcefile ${APP_SOURCES} )
     add_executable( ${executablename} ${sourcefile} )
     target_link_libraries( ${executablename} pthread )
 endforeach( sourcefile ${APP_SOURCES} )
-
-
-add_subdirectory(ipc)
-add_subdirectory(context)
