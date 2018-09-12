@@ -40,11 +40,11 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    if (!fork()) {  // child
-                    /**
-                     * child first wait for parent write to fdSet1[1], then read content from fdSet1[0], then write back to
-                     * fdSet2[1]
-                     */
+    if (!fork()) {
+        /**
+         * child first wait for parent write to fdSet1[1], then read content from fdSet1[0], then write back to
+         * fdSet2[1]
+         */
         for (int i = 0; i < count; i++) {
             if (read(fdSet1[0], buf, size) != size) {
                 perror("read");
@@ -57,7 +57,6 @@ int main(int argc, char *argv[]) {
             }
         }
     } else {  // parent
-
         uint64_t startNs = flux::ntime();
 
         /**
