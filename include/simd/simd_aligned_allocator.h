@@ -93,6 +93,6 @@ private:
     // Allocators are not required to be assignable
     SimdAlignedAllocator& operator=(const SimdAlignedAllocator&);
 };
-}
+}  // namespace flux
 
 #endif

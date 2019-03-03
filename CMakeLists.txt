@@ -12,7 +12,11 @@ message ("cxx Flags: " ${CMAKE_CXX_FLAGS})
 
 # Source code
 include_directories("/home/$USER/include")
-include_directories("src")
+include_directories("include")
 
 add_subdirectory(example)
 add_subdirectory(bench)
+
+SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -O3 -fno-exceptions -fno-rtti -pedantic -Werror")
+message ("cxx Flags: " ${CMAKE_CXX_FLAGS})
+add_subdirectory(gbench)

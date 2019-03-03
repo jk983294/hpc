@@ -80,20 +80,27 @@ inline std::string now_string() {
     return string(buffer);
 }
 
-    class Timer {
-    public:
-        Timer(const std::string& name) : name_(name), start_(ntime()) {}
-
-        ~Timer() {
-            uint64_t elapsed = ntime() - start_;
-            std::cout << name_ << ": " << std::fixed << std::setprecision(9) << ((double)elapsed / 1e9) << " s" << std::endl;
-        }
-
-    private:
-        std::string name_;
-        uint64_t start_;
-    };
+inline uint64_t rdtsc() {
+    unsigned long rax, rdx;
+    asm volatile("rdtsc\n" : "=a"(rax), "=d"(rdx));
+    return (rdx << 32) + rax;
 }
+
+class Timer {
+public:
+    Timer(const std::string& name) : name_(name), start_(ntime()) {}
+
+    ~Timer() {
+        uint64_t elapsed = ntime() - start_;
+        std::cout << name_ << ": " << std::fixed << std::setprecision(9) << ((double)elapsed / 1e9) << " s"
+                  << std::endl;
+    }
+
+private:
+    std::string name_;
+    uint64_t start_;
+};
+}  // namespace flux
 
 #define TIMER(name) flux::Timer timer__(name);
 
