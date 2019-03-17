@@ -29,7 +29,7 @@ int main(void) {
         }
 
         while (1) {
-            *shm = flux::ntime();
+            *shm = ztool::ntime();
             usleep(10000);
         }
     } else {
@@ -59,7 +59,7 @@ int main(void) {
             }
             preTime = *shm;
 
-            delta = flux::ntime() - preTime;
+            delta = ztool::ntime() - preTime;
 
             if (delta > max)
                 max = delta;

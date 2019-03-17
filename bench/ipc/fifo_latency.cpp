@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
             }
         }
     } else {  // parent
-        uint64_t startNs = flux::ntime();
+        uint64_t startNs = ztool::ntime();
 
         /**
          * parent first write to fdSet1[1], then wait child to echo back via fdSet2[0]
@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        const uint64_t delta = flux::ntime() - startNs;
+        const uint64_t delta = ztool::ntime() - startNs;
 
         printf("message size: %d round trip count: %d avg latency: %.1f ns\n", size, count, delta / ((float)count * 2));
     }

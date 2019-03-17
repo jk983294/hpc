@@ -29,7 +29,7 @@ int main(void) {
         return 0;
     }
 
-    const uint64_t start_ns = flux::ntime();
+    const uint64_t start_ns = ztool::ntime();
     for (int i = 0; i < iterations; i++) {
         *futex = 0xA;
         while (!syscall(SYS_futex, futex, FUTEX_WAKE, 1, NULL, NULL, 42)) {
@@ -40,7 +40,7 @@ int main(void) {
             sched_yield();
         }
     }
-    const uint64_t delta = flux::ntime() - start_ns;
+    const uint64_t delta = ztool::ntime() - start_ns;
 
     const int nSwitches = iterations * 4;
     printf("%i process context switches in %zu ns ( %.1f ns/ctxsw )\n", nSwitches, delta, (delta / (float)nSwitches));

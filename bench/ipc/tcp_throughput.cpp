@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
             return 1;
         }
 
-        uint64_t startNs = flux::ntime();
+        uint64_t startNs = ztool::ntime();
 
         for (int i = 0; i < count; i++) {
             if (write(sockfd, buf, size) != size) {
@@ -117,7 +117,7 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        const uint64_t delta = flux::ntime() - startNs;
+        const uint64_t delta = ztool::ntime() - startNs;
         double deltaSecond = ((double)delta) / 1e9;
 
         cout << std::fixed << setprecision(3) << "message size: " << size << " message count: " << count

@@ -11,12 +11,15 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g -Wall ")
 message ("cxx Flags: " ${CMAKE_CXX_FLAGS})
 
 # Source code
-include_directories("/home/$USER/include")
+include_directories(SYSTEM "/home/$USER/include")
+include_directories(SYSTEM "/opt/version/latest/3rd/include")
+include_directories(SYSTEM "/opt/version/latest/zergtool/include")
 include_directories("include")
 
 add_subdirectory(example)
 add_subdirectory(bench)
+add_subdirectory(test)
 
-SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -O3 -fno-exceptions -fno-rtti -pedantic -Werror")
+SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -O3 -fno-rtti -pedantic -Werror")
 message ("cxx Flags: " ${CMAKE_CXX_FLAGS})
 add_subdirectory(gbench)

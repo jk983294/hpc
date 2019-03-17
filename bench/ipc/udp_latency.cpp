@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
             return 1;
         }
 
-        uint64_t startNs = flux::ntime();
+        uint64_t startNs = ztool::ntime();
 
         for (int i = 0; i < count; i++) {
             if (sendto(sockfd, buf, size, 0, resChild->ai_addr, resChild->ai_addrlen) != size) {
@@ -121,7 +121,7 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        const uint64_t delta = flux::ntime() - startNs;
+        const uint64_t delta = ztool::ntime() - startNs;
 
         printf("message size: %d round trip count: %d avg latency: %.1f ns\n", size, count, delta / ((float)count * 2));
     }

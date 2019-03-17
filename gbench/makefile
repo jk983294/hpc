@@ -3,10 +3,10 @@
 SHELL = /bin/sh
 
 CXX = g++
-INC = -I./ -I$(HOME)/include
+INC = -I./ -I../include -I/opt/version/latest/zergtool/include -I$(HOME)/include
 LDFLAGS = -L./
 LDLIBS = -lbenchmark -pthread
-CXXFLAGS = -std=c++11 -Wall -O3 -fno-exceptions -fno-rtti -pedantic -Werror ${INC}
+CXXFLAGS = -std=c++11 -Wall -O3 -fno-rtti -pedantic -Werror ${INC}
 
 all: $(patsubst %.cpp, %, $(wildcard *.cpp))
 %: %.o
