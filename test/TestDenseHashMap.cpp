@@ -1,4 +1,4 @@
-#include <dense_hash_map.h>
+#include <hash/dense_hash_map.h>
 #include <catch.hpp>
 #include <string>
 
