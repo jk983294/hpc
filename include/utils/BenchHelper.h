@@ -66,6 +66,19 @@ inline vector<string> GetRandomStringFromFile() {
     cout << "get " << strings.size() << " entry from file" << endl;
     return strings;
 }
+
+template <typename T>
+inline vector<double> GenRandomNumbers(T min_val, T max_val, int64_t targetCount = 1000000) {
+    random_device rd;
+    mt19937 generator(rd());
+    std::uniform_real_distribution<T> urd(min_val, max_val);
+
+    vector<double> result;
+    for (int64_t i = 0; i < targetCount; ++i) {
+        result.push_back(urd(generator));
+    }
+    return result;
+}
 }  // namespace flux
 
 #endif
