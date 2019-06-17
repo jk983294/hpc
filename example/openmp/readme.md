@@ -3,13 +3,15 @@ single program multiply data
 
 you use the same code to loop over different set of data, then sum the result back to get the final result
 
-## work sharing pattern
+use thread id to select a set of tasks to manage shared data
+
+## loop pattern
 for this pattern to work, each iteration should not have dependency
 
-* loop construct
-* section construct
-* single construct
-* task construct
+## divide and conquer pattern
+divide problem into sub-problems and recombine solutions of sub-problems into a global solution
+
+usually use single construct to pick one thread to create tasks and the rest threads to pick up task from queue
 
 ### schedule
 how loop iterations are mapped onto threads
