@@ -14,8 +14,9 @@ message ("cxx Flags: " ${CMAKE_CXX_FLAGS})
 
 # Source code
 include_directories(SYSTEM "/home/$USER/include")
-include_directories(SYSTEM "/opt/version/latest/3rd/include")
+include_directories(SYSTEM "/opt/3rd/common/include/")
 include_directories(SYSTEM "/opt/version/latest/zergtool/include")
+include_directories(SYSTEM "/opt/version/latest/ornate/include/")
 include_directories("include")
 
 add_subdirectory(example)
