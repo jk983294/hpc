@@ -1,0 +1,1 @@
+g++ app.cpp -lcublas -lculibos -lcudart -lpthread -ldl -I/usr/local/cuda/include -L/usr/local/cuda/lib64 -o app
