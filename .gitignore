@@ -3,3 +3,4 @@ install/
 *.pyc
 cmake-build-debug/
 *.gch
+.vscode/
